@@ -19,7 +19,8 @@ public class ElementUtils{
     public static Cell<?> getCell(Element element){
         Group parent = element.parent;
 
-        if(parent instanceof Table table){
+        if(parent instanceof Table){
+            Table table = (Table)parent;
             return table.getCell(element);
         }
 
@@ -60,7 +61,7 @@ public class ElementUtils{
      * @param allowMobile 是否需要手机提示
      */
     public static void addTooltip(Element element, Cons<Table> cons, int align, boolean allowMobile){
-        var tip = new Tooltip(cons){
+        Tooltip tip = new Tooltip(cons){
             {
                 targetActor = element;
 
@@ -112,7 +113,8 @@ public class ElementUtils{
 
             Element hit;
 
-            if(child instanceof Group g){
+            if(child instanceof Group){
+                Group g = (Group)child;
                 hit = hit(g, point.x, point.y);
             }else{
                 hit = hit(child, point.x, point.y);
