@@ -19,7 +19,8 @@ public class ElementUtils{
     public static Cell<?> getCell(Element element){
         Group parent = element.parent;
 
-        if(parent instanceof Table table){
+        if(parent instanceof Table){
+            Table table = (Table)parent;
             return table.getCell(element);
         }
 
@@ -112,7 +113,8 @@ public class ElementUtils{
 
             Element hit;
 
-            if(child instanceof Group g){
+            if(child instanceof Group){
+                Group g = (Group)child;
                 hit = hit(g, point.x, point.y);
             }else{
                 hit = hit(child, point.x, point.y);
