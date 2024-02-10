@@ -14,7 +14,7 @@ repositories{
 
 java{
     targetCompatibility = 8
-    sourceCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = 8
 }
 
 ext{
@@ -28,7 +28,7 @@ ext{
 
 allprojects{
     tasks.withType(JavaCompile){
-        options.compilerArgs.addAll(['--release', '8'])
+//        options.compilerArgs.addAll(['--release', '8'])
         options.encoding("UTF-8")
     }
 }
