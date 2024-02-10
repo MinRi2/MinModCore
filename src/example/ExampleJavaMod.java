@@ -11,6 +11,8 @@ import mindustry.ui.dialogs.*;
 
 public class ExampleJavaMod extends Mod{
 
+    public static String TEST = "TEST";
+
     public ExampleJavaMod(){
         Log.info("Loaded ExampleJavaMod constructor.");
 

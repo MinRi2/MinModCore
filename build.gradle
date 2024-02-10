@@ -1,6 +1,8 @@
 apply plugin: "java"
+apply plugin: 'maven-publish'
 
-version '1.0'
+group = 'com.github.MinRi2'
+version = '1.0'
 
 sourceSets.main.java.srcDirs = ["src"]
 
@@ -95,6 +97,14 @@ task deploy(type: Jar){
         delete{
             delete "$buildDir/libs/${project.archivesBaseName}Desktop.jar"
             delete "$buildDir/libs/${project.archivesBaseName}Android.jar"
+        }
+    }
+}
+
+publishing {
+    publications {
+        release(MavenPublication) {
+            from components.release
         }
     }
 }
