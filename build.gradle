@@ -14,7 +14,7 @@ repositories{
 
 java{
     targetCompatibility = 8
-    sourceCompatibility = 8
+    sourceCompatibility = 21
 }
 
 ext{
@@ -28,7 +28,7 @@ ext{
 
 allprojects{
     tasks.withType(JavaCompile){
-//        options.compilerArgs.addAll(['--release', '8'])
+        options.compilerArgs.addAll(['--release', '8'])
         options.encoding("UTF-8")
     }
 }
@@ -37,7 +37,7 @@ dependencies{
     compileOnly "com.github.Anuken.Arc:arc-core:$mindustryVersion"
     compileOnly "com.github.Anuken.Mindustry:core:$mindustryVersion"
 
-//    annotationProcessor "com.github.Anuken:jabel:$jabelVersion"
+    annotationProcessor "com.github.Anuken:jabel:$jabelVersion"
 }
 
 //force arc version
