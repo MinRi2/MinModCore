@@ -1,2 +1,2 @@
-java:
-  version: 16
+jdk:
+  - openjdk16
