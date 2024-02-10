@@ -28,6 +28,7 @@ ext{
 
 allprojects{
     tasks.withType(JavaCompile){
+        options.compilerArgs.addAll(['--release', '16'])
         options.encoding("UTF-8")
     }
 }
