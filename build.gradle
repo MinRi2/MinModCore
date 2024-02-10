@@ -1,5 +1,5 @@
 apply plugin: "java"
-apply plugin: "maven-publish"
+apply plugin: "maven"
 
 group = 'com.github.MinRi2'
 version = '1.0'
