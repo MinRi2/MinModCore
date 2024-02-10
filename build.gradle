@@ -13,8 +13,8 @@ repositories{
 }
 
 java{
-    targetCompatibility = 8
-    sourceCompatibility = 8
+    targetCompatibility = 16
+    sourceCompatibility = 16
 }
 
 ext{
