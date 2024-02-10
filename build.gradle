@@ -104,7 +104,7 @@ task deploy(type: Jar){
 publishing {
     publications {
         release(MavenPublication) {
-            from components.release
+            from components.java
         }
     }
 }
