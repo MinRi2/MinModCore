@@ -2,7 +2,7 @@ package MinRi2.ModCore.ui.operator;
 
 import arc.scene.ui.layout.*;
 
-public class OperableTable extends Table implements OperateCons{
+public class OperableTable extends Table implements OperateConsumer{
     public boolean keepWithinStage;
 
     public OperableTable(boolean keepWithinStage){

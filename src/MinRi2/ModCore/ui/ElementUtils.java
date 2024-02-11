@@ -19,8 +19,7 @@ public class ElementUtils{
     public static Cell<?> getCell(Element element){
         Group parent = element.parent;
 
-        if(parent instanceof Table){
-            Table table = (Table)parent;
+        if(parent instanceof Table table){
             return table.getCell(element);
         }
 
@@ -113,8 +112,7 @@ public class ElementUtils{
 
             Element hit;
 
-            if(child instanceof Group){
-                Group g = (Group)child;
+            if(child instanceof Group g){
                 hit = hit(g, point.x, point.y);
             }else{
                 hit = hit(child, point.x, point.y);
@@ -146,8 +144,8 @@ public class ElementUtils{
      * @param title 添加的标题内容
      * @param color 背景颜色1
      */
-    public static void addTitle(Table table, String title, Color color){
-        addTitle(null, table, title, color);
+    public static void addTitle(Table table, String title){
+        addTitle(null, table, title);
     }
 
     /**
@@ -155,9 +153,8 @@ public class ElementUtils{
      * @param background 背景
      * @param table 添加标题的表
      * @param title 添加的标题内容
-     * @param color 背景颜色1
      */
-    public static void addTitle(Drawable background, Table table, String title, Color color){
+    public static void addTitle(Drawable background, Table table, String title){
         table.table(background, t -> {
             t.add(title).style(Styles.outlineLabel);
         }).margin(8f).growX();

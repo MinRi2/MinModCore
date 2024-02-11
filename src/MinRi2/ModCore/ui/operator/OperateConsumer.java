@@ -2,7 +2,7 @@ package MinRi2.ModCore.ui.operator;
 
 import arc.scene.*;
 
-public interface OperateCons{
+public interface OperateConsumer{
     default boolean keepWithinStage(){
         return true;
     }

@@ -47,7 +47,7 @@ public class ElementOperator{
     private static Element target;
     private static PuppetElement puppet;
     private static Element hitter;
-    private static @Nullable OperateCons consumer;
+    private static @Nullable OperateConsumer consumer;
     private static OperatorBackground background;
     private static boolean initialized;
     private static int touchEdge;
@@ -172,9 +172,9 @@ public class ElementOperator{
     /**
      * 操作元素
      * @param element 操作的元素
-     * @param operateCons 操作传感
+     * @param operateConsumer 操作传感
      */
-    public static void operate(Element element, @Nullable OperateCons operateCons){
+    public static void operate(Element element, @Nullable OperateConsumer operateConsumer){
 
         if(!initialized){
             init();
@@ -189,7 +189,7 @@ public class ElementOperator{
         }
 
         target = element;
-        consumer = operateCons;
+        consumer = operateConsumer;
 
         puppet.setTarget(target);
 
