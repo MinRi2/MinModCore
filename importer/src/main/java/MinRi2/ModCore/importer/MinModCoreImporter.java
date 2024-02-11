@@ -1,4 +1,4 @@
-package MinRi2.importer;
+package MinRi2.ModCore.importer;
 
 import arc.util.*;
 
