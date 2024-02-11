@@ -27,9 +27,20 @@ ext{
 }
 
 allprojects{
+    apply plugin: "java"
+    apply plugin: "maven-publish"
+
     tasks.withType(JavaCompile){
         options.compilerArgs.addAll(['--release', '17'])
         options.encoding("UTF-8")
+    }
+
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.java
+            }
+        }
     }
 }
 
@@ -97,14 +108,6 @@ task deploy(type: Jar){
         delete{
             delete "$buildDir/libs/${project.archivesBaseName}Desktop.jar"
             delete "$buildDir/libs/${project.archivesBaseName}Android.jar"
-        }
-    }
-}
-
-publishing {
-    publications {
-        release(MavenPublication) {
-            from components.java
         }
     }
 }
