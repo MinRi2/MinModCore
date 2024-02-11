@@ -1,4 +1,4 @@
-package main.java.MinRi2.importer;
+package MinRi2.importer;
 
 import arc.util.*;
 
