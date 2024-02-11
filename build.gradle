@@ -2,15 +2,8 @@ apply plugin: "java"
 apply plugin: "maven-publish"
 
 group = 'com.github.MinRi2'
-version = '1.0'
 
 sourceSets.main.java.srcDirs = ["src"]
-
-repositories{
-    mavenCentral()
-    maven{ url "https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository" }
-    maven{ url 'https://www.jitpack.io' }
-}
 
 java{
     targetCompatibility = 17
@@ -27,6 +20,16 @@ ext{
 }
 
 allprojects{
+    repositories{
+        mavenCentral()
+        maven{ url "https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository" }
+        maven{ url 'https://www.jitpack.io' }
+    }
+}
+
+configure([":core", ":importer"].collect{
+    project(it)
+}){
     apply plugin: "java"
     apply plugin: "maven-publish"
 
@@ -38,26 +41,30 @@ allprojects{
     publishing {
         publications {
             release(MavenPublication) {
+                groupId "com.github.MinRi2.MinModCore"
+                version "local"
                 from components.java
             }
         }
     }
 }
 
-dependencies{
-//    annotationProcessor "com.github.Anuken:jabel:$jabelVersion"
-
-    compileOnly "com.github.Anuken.Arc:arc-core:$mindustryVersion"
-    compileOnly "com.github.Anuken.Mindustry:core:$mindustryVersion"
+project(':core'){
+    dependencies{
+        compileOnly "com.github.Anuken.Arc:arc-core:$mindustryVersion"
+        compileOnly "com.github.Anuken.Mindustry:core:$mindustryVersion"
+    }
 }
 
-//force arc version
-configurations.all{
-    resolutionStrategy.eachDependency { details ->
-        if(details.requested.group == 'com.github.Anuken.Arc'){
-            details.useVersion "$mindustryVersion"
-        }
+project(':importer'){
+    dependencies{
+        compileOnly "com.github.Anuken.Arc:arc-core:$mindustryVersion"
+        compileOnly "com.github.Anuken.Mindustry:core:$mindustryVersion"
     }
+}
+
+dependencies{
+    implementation project(":core")
 }
 
 task jarAndroid{
