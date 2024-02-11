@@ -13,7 +13,7 @@ repositories{
 }
 
 java{
-    targetCompatibility = 8
+    targetCompatibility = 17
     sourceCompatibility = 17
 }
 
@@ -28,13 +28,13 @@ ext{
 
 allprojects{
     tasks.withType(JavaCompile){
-        options.compilerArgs.addAll(['--release', '8'])
+        options.compilerArgs.addAll(['--release', '17'])
         options.encoding("UTF-8")
     }
 }
 
 dependencies{
-    annotationProcessor "com.github.Anuken:jabel:$jabelVersion"
+//    annotationProcessor "com.github.Anuken:jabel:$jabelVersion"
 
     compileOnly "com.github.Anuken.Arc:arc-core:$mindustryVersion"
     compileOnly "com.github.Anuken.Mindustry:core:$mindustryVersion"
