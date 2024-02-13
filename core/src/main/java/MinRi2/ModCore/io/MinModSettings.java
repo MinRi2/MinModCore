@@ -56,12 +56,12 @@ public class MinModSettings{
         backupFi = minModSettingsRoot.child(modName + ".settings.backup");
 
         try{
-            if(!settingsFi.exists() && !settingsFi.file().createNewFile()){
-                Log.err("Cannot create @", settingsFi.name());
+            if(!settingsFi.exists()){
+                settingsFi.file().createNewFile();
             }
 
-            if(!backupFi.exists() && !backupFi.file().createNewFile()){
-                Log.err("Cannot create @", backupFi.name());
+            if(!backupFi.exists()){
+                backupFi.file().createNewFile();
             }
         }catch(IOException e){
             throw new RuntimeException(e);
@@ -186,7 +186,7 @@ public class MinModSettings{
 
         try{
             loadSettings(settingsFi);
-        }catch(Throwable e){
+        }catch(IOException exception){
 
             if(!backupFi.exists()){
                 return;
