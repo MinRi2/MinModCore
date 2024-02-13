@@ -1,20 +1,22 @@
 #the mod name as displayed in-game
-displayName: "Java Mod Template"
+displayName: "MinModCore"
 
 #the internal name of your mod
-name: "example-java-mod"
+name: "min-mod-core"
 
 #your name
-author: "You"
+author: "MinRi2"
 
 #the fully qualified main class of the mod
-main: "example.ExampleJavaMod"
+main: "MinRi2.MinModCore.Main"
 
 #the mod description as seen in the mod dialog
-description: "A Mindustry Java mod template."
+description: "MinModCore"
 
 #the mod version
 version: 1.0
+
+hidden: true
 
 #the minimum game build required to run this mod
 minGameVersion: 145

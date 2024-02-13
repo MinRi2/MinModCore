@@ -6,8 +6,8 @@ group = 'com.github.MinRi2'
 sourceSets.main.java.srcDirs = ["src"]
 
 java{
-    targetCompatibility = 17
-    sourceCompatibility = 17
+    targetCompatibility = 16
+    sourceCompatibility = 16
 }
 
 ext{
@@ -17,6 +17,8 @@ ext{
     //windows sucks
     isWindows = System.getProperty("os.name").toLowerCase().contains("windows")
     sdkRoot = System.getenv("ANDROID_HOME") ?: System.getenv("ANDROID_SDK_ROOT")
+
+    modDir = "${System.getenv("APPDATA")}\\Mindustry\\mods"
 }
 
 allprojects{
@@ -34,7 +36,7 @@ configure([":core", ":importer"].collect{
     apply plugin: "maven-publish"
 
     tasks.withType(JavaCompile){
-        options.compilerArgs.addAll(['--release', '17'])
+        options.compilerArgs.addAll(['--release', '16'])
         options.encoding("UTF-8")
     }
 
@@ -56,15 +58,10 @@ project(':core'){
     }
 }
 
-project(':importer'){
-    dependencies{
-        compileOnly "com.github.Anuken.Arc:arc-core:$mindustryVersion"
-        compileOnly "com.github.Anuken.Mindustry:core:$mindustryVersion"
-    }
-}
-
 dependencies{
     implementation project(":core")
+
+    compileOnly "com.github.Anuken.Mindustry:core:$mindustryVersion"
 }
 
 task jarAndroid{
@@ -115,6 +112,18 @@ task deploy(type: Jar){
         delete{
             delete "$buildDir/libs/${project.archivesBaseName}Desktop.jar"
             delete "$buildDir/libs/${project.archivesBaseName}Android.jar"
+        }
+    }
+}
+
+task compileAndCopy{
+    dependsOn jar
+
+    doLast{
+        copy{
+            from "$buildDir/libs/"
+            into "$modDir/"
+            include "${project.archivesBaseName}Desktop.jar"
         }
     }
 }

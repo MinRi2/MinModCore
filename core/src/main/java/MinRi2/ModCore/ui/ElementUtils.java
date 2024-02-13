@@ -5,11 +5,11 @@ import arc.graphics.*;
 import arc.math.geom.*;
 import arc.scene.*;
 import arc.scene.event.*;
-import arc.scene.style.*;
 import arc.scene.ui.*;
 import arc.scene.ui.layout.*;
 import arc.util.*;
 import arc.util.pooling.*;
+import mindustry.graphics.*;
 import mindustry.ui.*;
 
 import static arc.Core.bundle;
@@ -142,20 +142,19 @@ public class ElementUtils{
      * 添加标题
      * @param table 添加标题的表
      * @param title 添加的标题内容
-     * @param color 背景颜色1
      */
     public static void addTitle(Table table, String title){
-        addTitle(null, table, title);
+        addTitle(table, title, Pal.accent);
     }
 
     /**
      * 添加标题
-     * @param background 背景
      * @param table 添加标题的表
      * @param title 添加的标题内容
+     * @param color 背景颜色1
      */
-    public static void addTitle(Drawable background, Table table, String title){
-        table.table(background, t -> {
+    public static void addTitle(Table table, String title, Color color){
+        table.table(MinTex.getColoredRegion(color), t -> {
             t.add(title).style(Styles.outlineLabel);
         }).margin(8f).growX();
         table.row();
