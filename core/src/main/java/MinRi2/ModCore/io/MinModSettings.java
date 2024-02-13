@@ -187,11 +187,6 @@ public class MinModSettings{
         try{
             loadSettings(settingsFi);
         }catch(IOException exception){
-
-            if(!backupFi.exists()){
-                return;
-            }
-
             try{
                 loadSettings(backupFi);
             }catch(IOException ignored){
