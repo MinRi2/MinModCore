@@ -30,7 +30,7 @@ allprojects{
     }
 }
 
-configure([":core", ":importer"].collect{
+configure([":core"].collect{
     project(it)
 }){
     apply plugin: "java"
