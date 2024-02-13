@@ -54,6 +54,7 @@ public class ElementOperator{
 
     static{
         Events.on(ResetEvent.class, e -> Core.app.post(ElementOperator::getVanillaElements));
+        Events.on(ResizeEvent.class, e -> Core.app.post(ElementOperator::getVanillaElements));
     }
 
     private ElementOperator(){
