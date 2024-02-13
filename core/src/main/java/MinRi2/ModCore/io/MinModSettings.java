@@ -55,17 +55,7 @@ public class MinModSettings{
         settingsFi = minModSettingsRoot.child(modName);
         backupFi = minModSettingsRoot.child(modName + ".backup");
 
-        try{
-            if(!settingsFi.exists()){
-                settingsFi.file().createNewFile();
-            }
 
-            if(!backupFi.exists()){
-                backupFi.file().createNewFile();
-            }
-        }catch(IOException e){
-            throw new RuntimeException(e);
-        }
 
         load();
         loaded = true;
@@ -184,6 +174,7 @@ public class MinModSettings{
     public void load(){
         loaded = true;
 
+        checkFile();
         try{
             loadSettings(settingsFi);
         }catch(IOException exception){
@@ -197,6 +188,7 @@ public class MinModSettings{
     public void save(){
         if(!loaded) return;
 
+        checkFile();
         settingsFi.copyTo(backupFi);
 
         var writes = settingsFi.writes();
@@ -232,6 +224,20 @@ public class MinModSettings{
 
         writes.close();
         modified = false;
+    }
+
+    private void checkFile(){
+        try{
+            if(!settingsFi.exists()){
+                settingsFi.file().createNewFile();
+            }
+
+            if(!backupFi.exists()){
+                backupFi.file().createNewFile();
+            }
+        }catch(IOException e){
+            throw new RuntimeException(e);
+        }
     }
 
     public static class MinSettingEntry{
