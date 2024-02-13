@@ -2,7 +2,6 @@ apply plugin: "java"
 apply plugin: "maven-publish"
 
 group = 'com.github.MinRi2'
-version = "v1.0"
 
 sourceSets.main.java.srcDirs = ["src"]
 
@@ -45,6 +44,7 @@ configure([":core"].collect{
         publications {
             release(MavenPublication) {
                 groupId "com.github.MinRi2.MinModCore"
+                version "local"
                 from components.java
             }
         }

@@ -52,8 +52,8 @@ public class MinModSettings{
     public void init(){
         String modName = mod.meta.name;
 
-        settingsFi = minModSettingsRoot.child(modName + ".settings");
-        backupFi = minModSettingsRoot.child(modName + ".settings.backup");
+        settingsFi = minModSettingsRoot.child(modName);
+        backupFi = minModSettingsRoot.child(modName + ".backup");
 
         try{
             if(!settingsFi.exists()){
