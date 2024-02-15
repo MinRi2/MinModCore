@@ -8,7 +8,7 @@ name: "min-mod-core"
 author: "MinRi2"
 
 #the fully qualified main class of the mod
-main: "MinRi2.MinModCore.Main"
+main: "MinRi2.ModCore.Main"
 
 #the mod description as seen in the mod dialog
 description: "MinModCore"

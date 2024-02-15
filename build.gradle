@@ -6,7 +6,7 @@ group = 'com.github.MinRi2'
 sourceSets.main.java.srcDirs = ["src"]
 
 java{
-    targetCompatibility = 16
+    targetCompatibility = 8
     sourceCompatibility = 16
 }
 
@@ -22,6 +22,11 @@ ext{
 }
 
 allprojects{
+    tasks.withType(JavaCompile){
+        options.compilerArgs.addAll(['--release', '8'])
+        options.encoding("UTF-8")
+    }
+
     repositories{
         mavenCentral()
         maven{ url "https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository" }
@@ -34,11 +39,6 @@ configure([":core"].collect{
 }){
     apply plugin: "java"
     apply plugin: "maven-publish"
-
-    tasks.withType(JavaCompile){
-        options.compilerArgs.addAll(['--release', '16'])
-        options.encoding("UTF-8")
-    }
 
     publishing {
         publications {
@@ -55,13 +55,13 @@ project(':core'){
     dependencies{
         compileOnly "com.github.Anuken.Arc:arc-core:$mindustryVersion"
         compileOnly "com.github.Anuken.Mindustry:core:$mindustryVersion"
+
+        annotationProcessor "com.github.Anuken:jabel:$jabelVersion"
     }
 }
 
 dependencies{
     implementation project(":core")
-
-    compileOnly "com.github.Anuken.Mindustry:core:$mindustryVersion"
 }
 
 task jarAndroid{
