@@ -7,7 +7,7 @@ sourceSets.main.java.srcDirs = ["src"]
 
 java{
     targetCompatibility = 8
-    sourceCompatibility = 17
+    sourceCompatibility = 16
 }
 
 ext{
