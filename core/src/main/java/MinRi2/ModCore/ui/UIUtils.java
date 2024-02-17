@@ -53,6 +53,7 @@ public class UIUtils{
         table.touchable = Touchable.disabled;
 
         table.update(() -> {
+            table.toFront();
             if(state.isMenu()) table.remove();
         });
 
