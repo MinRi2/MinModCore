@@ -4,10 +4,15 @@ import MinRi2.ModCore.utils.*;
 import arc.files.*;
 import arc.struct.*;
 import arc.util.*;
+import arc.util.Timer;
 import arc.util.io.*;
+import arc.util.serialization.*;
+import arc.util.serialization.JsonValue.*;
 import mindustry.mod.Mods.*;
 
 import java.io.*;
+import java.lang.reflect.*;
+import java.util.*;
 
 import static mindustry.Vars.*;
 
@@ -33,10 +38,8 @@ public class MinModSettings{
             for(MinModSettings modSetting : modSettings){
                 if(modSetting.modified){
                     modSetting.save();
-                    Log.info("Save @", modSetting.mod.meta.displayName);
                 }
             }
-            Log.info("Save done");
         }, 10, 30);
     }
 
@@ -58,8 +61,6 @@ public class MinModSettings{
         settingsFi = minModSettingsRoot.child(modName);
         backupFi = minModSettingsRoot.child(modName + ".backup");
 
-
-
         load();
         loaded = true;
     }
@@ -70,6 +71,10 @@ public class MinModSettings{
 
     public void put(String name, Object obj){
         put(name, obj, false, false);
+    }
+
+    public void putSave(String name, Object obj){
+        put(name, obj, false, true);
     }
 
     public void put(String name, Object obj, boolean isDef, boolean forceSave){
@@ -168,6 +173,8 @@ public class MinModSettings{
             if(debug){
                 Log.err(e);
             }
+
+            throw e;
         }
 
         reads.close();
@@ -183,7 +190,8 @@ public class MinModSettings{
         }catch(IOException exception){
             try{
                 loadSettings(backupFi);
-            }catch(IOException ignored){
+            }catch(IOException e){
+                Log.err(mod.name + ": Fail to load settings", e);
             }
         }
     }
@@ -198,7 +206,6 @@ public class MinModSettings{
 
         writes.i(mSettings.size);
         for(MinSettingEntry setting : mSettings){
-
             Object value = setting.value;
 
             writes.str(setting.name);

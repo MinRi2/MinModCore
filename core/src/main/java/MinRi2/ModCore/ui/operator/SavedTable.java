@@ -23,13 +23,13 @@ public class SavedTable extends OperableTable{
         this.saveSize = saveSize;
 
         savePositionTask = new DebounceTask(1f, () -> {
-            settings.put(name + ".pos.x", x);
-            settings.put(name + ".pos.y", y);
+            settings.putSave(name + ".pos.x", x);
+            settings.putSave(name + ".pos.y", y);
         });
 
         saveSizeTask = new DebounceTask(1f, () -> {
-            settings.put(name + ".size.width", width);
-            settings.put(name + ".size.height", height);
+            settings.putSave(name + ".size.width", width);
+            settings.putSave(name + ".size.height", height);
         });
     }
 
