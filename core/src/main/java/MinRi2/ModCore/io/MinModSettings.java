@@ -33,8 +33,10 @@ public class MinModSettings{
             for(MinModSettings modSetting : modSettings){
                 if(modSetting.modified){
                     modSetting.save();
+                    Log.info("Save @", modSetting.mod.meta.displayName);
                 }
             }
+            Log.info("Save done");
         }, 10, 30);
     }
 
@@ -46,6 +48,7 @@ public class MinModSettings{
         LoadedMod mod = ModsHelper.getMod(modName);
         MinModSettings settings = new MinModSettings(mod);
         settings.init();
+        modSettings.add(settings);
         return settings;
     }
 
