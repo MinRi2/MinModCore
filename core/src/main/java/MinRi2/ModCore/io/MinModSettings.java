@@ -139,6 +139,21 @@ public class MinModSettings{
         return get(name, def);
     }
 
+    public void load(){
+        loaded = true;
+
+        checkFile();
+        try{
+            loadSettings(settingsFi);
+        }catch(Exception exception){
+            try{
+                loadSettings(backupFi);
+            }catch(Exception e){
+                Log.err(mod.name + ": Fail to load settings", e);
+            }
+        }
+    }
+
     private void loadSettings(Fi fi) throws IOException{
         mSettings.clear();
 
@@ -179,21 +194,6 @@ public class MinModSettings{
 
         reads.close();
         modified = false;
-    }
-
-    public void load(){
-        loaded = true;
-
-        checkFile();
-        try{
-            loadSettings(settingsFi);
-        }catch(IOException exception){
-            try{
-                loadSettings(backupFi);
-            }catch(IOException e){
-                Log.err(mod.name + ": Fail to load settings", e);
-            }
-        }
     }
 
     public void save(){
