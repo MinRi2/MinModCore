@@ -15,7 +15,7 @@ public class BorderSnapper{
 
     public boolean pause;
 
-    // 目标元素相对于吸附元素的原点坐标
+    // 吸附元素左下角相对于目标元素左下角的坐标
     private float relativeX, relativeY;
     // 记录吸附元素的坐标，用于判断坐标是否改变
     private float lastX, lastY;
@@ -35,12 +35,12 @@ public class BorderSnapper{
         if(canSnap(snapElem, snapAlign)){
             this.snapElem = snapElem;
 
-            Vec2 pos = Tmp.v1.setZero();
-            ElementUtils.localToTargetCoordinate(targetElem, snapElem.parent, pos);
+            Vec2 p1 = Tmp.v1.setZero(), p2 = Tmp.v2.setZero();
+            targetElem.localToStageCoordinates(p1);
+            snapElem.localToStageCoordinates(p2);
 
-            relativeX = snapElem.x - pos.x;
-            relativeY = snapElem.y - pos.y;
-
+            relativeX = p2.x - p1.x;
+            relativeY = p2.y - p1.y;
             return true;
         }
 
@@ -58,13 +58,11 @@ public class BorderSnapper{
     private void updateSnap(){
         if(pause || snapElem == null) return;
 
-        if(!snapElem.hasParent()) return;
-
         if(updateSnapChanged()){
-            float sx = snapElem.x;
-            float sy = snapElem.y;
+            Vec2 p = Tmp.v1.setZero();
+            snapElem.localToStageCoordinates(p);
 
-            targetElem.setPosition(sx - relativeX, sy - relativeY);
+            targetElem.setPosition(p.x + relativeX, p.y + relativeY);
             targetElem.keepInStage();
         }
     }
@@ -76,22 +74,13 @@ public class BorderSnapper{
         if(sx != lastX || sy != lastY){
             lastX = sx;
             lastY = sy;
-
             return true;
         }
-
-        lastX = sx;
-        lastY = sy;
-
         return false;
     }
 
     private boolean canSnap(Element snapElem, int snapAlign){
         if(snapElem == null || snapAlign == 0){
-            return false;
-        }
-
-        if(!snapElem.hasParent()){
             return false;
         }
 
