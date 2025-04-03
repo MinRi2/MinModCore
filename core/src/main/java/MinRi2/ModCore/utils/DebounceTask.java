@@ -9,10 +9,10 @@ import arc.util.Timer.*;
  * @author minri2
  */
 public class DebounceTask{
-    private final float delay;
+    private float delay;
+
     private final Runnable runnable;
     private final Timer timer;
-
     public DebounceTask(float delay, Runnable runnable){
         this.timer = new Timer();
 
@@ -31,5 +31,10 @@ public class DebounceTask{
                 runnable.run();
             }
         }, delay);
+    }
+
+
+    public void setDelay(float delay){
+        this.delay = delay;
     }
 }
