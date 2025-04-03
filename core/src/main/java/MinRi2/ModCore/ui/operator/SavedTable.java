@@ -23,13 +23,13 @@ public class SavedTable extends OperableTable{
         this.saveSize = saveSize;
 
         savePositionTask = new DebounceTask(1f, () -> {
-            settings.putSave(name + ".pos.x", x);
-            settings.putSave(name + ".pos.y", y);
+            settings.putSave(this.name + ".pos.x", x);
+            settings.putSave(this.name + ".pos.y", y);
         });
 
         saveSizeTask = new DebounceTask(1f, () -> {
-            settings.putSave(name + ".size.width", width);
-            settings.putSave(name + ".size.height", height);
+            settings.putSave(this.name + ".size.width", width);
+            settings.putSave(this.name + ".size.height", height);
         });
     }
 
@@ -54,17 +54,25 @@ public class SavedTable extends OperableTable{
         }
     }
 
-    @Override
-    public void onDragged(float deltaX, float deltaY){
+    public void savePosition(){
         if(savePosition){
             savePositionTask.run();
+        };
+    }
+
+    public void saveSize(){
+        if(saveSize){
+            saveSizeTask.run();
         }
     }
 
     @Override
-    public void onResized(float deltaWidth, float deltaHeight){
-        if(saveSize){
-            saveSizeTask.run();
-        }
+    public void onDragged(float newX, float newY){
+        savePosition();
+    }
+
+    @Override
+    public void onResized(float newWidth, float newHeight){
+        saveSize();
     }
 }

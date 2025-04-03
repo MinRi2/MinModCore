@@ -34,7 +34,7 @@ public class ElementOperator{
 
     // 当前对齐的线，用于绘制 (Scene坐标系)
     private static final ObjectSet<Float> verticalLines = new ObjectSet<>();
-    private static final ObjectSet<Float> horizontalLines = new ObjectSet<>();
+    private static final ObjectSet<Float> horizontalLines = new ObjectSet<>(); // FloatSeq?
 
     // 大小边框所占比例(中间是拖拽)
     private static final float resizeBorderRatio = 2f / 10f;
@@ -270,7 +270,7 @@ public class ElementOperator{
                 puppet.keepInStage();
             }
 
-            consumer.onDragged(deltaX, deltaY);
+            consumer.onDragged(puppet.x, puppet.y);
         }
 
         updateDragAlign();
@@ -327,7 +327,7 @@ public class ElementOperator{
         target.invalidateHierarchy();
 
         if(consumer != null){
-            consumer.onResized(deltaX, deltaY);
+            consumer.onResized(width, height);
         }
 
         updateResizeAlign();
